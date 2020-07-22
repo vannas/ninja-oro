@@ -57,6 +57,9 @@ export default {
         store.new_activity(`Cielos! Perdiste ${ganaoro} oros el ${momento}`);
         }
       }
+
+      const historia = document.querySelector('.historia');
+        historia.scrollTo(0, historia.scrollHeight);
     },
   }
 }
