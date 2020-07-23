@@ -49,12 +49,14 @@ export default {
       }
       store.update_puntaje(ganaoro); // sumo oros
       if (ganaoro > 0){
-        store.new_activity(`Ganaste ${ganaoro} oros el ${momento}`);  //genero actividad (ganancia)
+        store.new_activity({texto:`Ganaste ${ganaoro} oros el ${momento}`, valor:ganaoro});  //genero actividad (ganancia)
+        
       } else {
         if (ganaoro == '0'){
-        store.new_activity(`Sin suerte. No ganaste oro el ${momento}`);
+        store.new_activity({texto:`Sin suerte. No ganaste oro el ${momento}`, valor:ganaoro}); //Neutra
         } else if (ganaoro < '0'){
-        store.new_activity(`Cielos! Perdiste ${ganaoro} oros el ${momento}`);
+        store.new_activity({texto:`Cielos! Perdiste ${ganaoro} oros el ${momento}`, valor:ganaoro}); // Pierdo
+        
         }
       }
 

@@ -4,7 +4,8 @@
       <img src="@/assets/img/goldbann.png" alt="player" id="banner">
     </nav>
 
-    <img src="@/assets/img/goldbarr.png" alt="gold"><h3>Oro Ganado: {{golds}} </h3> 
+    <img src="@/assets/img/goldbarr.png" alt="gold">
+    <h3>Oro Ganado:</h3><h3 :class="{red: golds<0}">{{golds}}</h3> 
     
     <ninjagold title="Granja" :min="10" :max="20" /> 
     <ninjagold title="Cueva" :min="5" :max="10" /> 
@@ -14,7 +15,7 @@
     <h4 class="col-8">Actividades</h4>
     <div class="historia" >
     <ul>
-      <li v-for="(evento, i) in eventos" v-bind:key="i"> {{evento}}</li>
+      <li :class="{red: evento.valor<0, green: evento.valor>0}" v-for="(evento, i) in eventos" v-bind:key="i"> {{evento.texto}}</li>
     </ul>
     </div>
     <button class="btn btn-danger text-white" @click="resetear_todo">Reset</button>
@@ -43,8 +44,9 @@ export default {
       }
       else return;
     }
+    }
   }
-}
+
 </script>
 
 <style >
@@ -60,6 +62,7 @@ export default {
 </style>
 <style scoped>
 h3 {
+  display:block;
   margin: 10px 10px;
 }
 h4 {
@@ -89,6 +92,7 @@ li {
   margin-top:0.8em;
   text-align: justify;
 }
+
 ul{
   list-style: none;
   margin-top:0.4em;  
@@ -108,6 +112,13 @@ ul{
 
 .btn{
   margin-top:14px;
+}
+
+.red{
+  color:darkred;
+}
+.green{
+  color:green;
 }
 
 </style>
