@@ -9,5 +9,8 @@ export default {
     },
     new_activity(actividad){
         this.state.eventos = [...this.state.eventos, actividad];
-    }
+    },
+    
 }
+
+

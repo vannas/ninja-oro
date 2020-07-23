@@ -17,6 +17,7 @@
       <li v-for="(evento, i) in eventos" v-bind:key="i"> {{evento}}</li>
     </ul>
     </div>
+    <button class="btn btn-danger text-white" @click="resetear_todo">Reset</button>
   </div>
 </template>
 
@@ -32,6 +33,16 @@ export default {
   },
   data: () => {
     return store.state
+  },
+  methods:{
+    resetear_todo: function(){
+      var y=confirm("¿Verdaderamente quieres empezar de cero? Se borrará todo tu progreso");
+      if(y==true){
+          store.state.golds=0;
+          store.state.eventos=[];
+      }
+      else return;
+    }
   }
 }
 </script>
@@ -52,7 +63,7 @@ h3 {
   margin: 10px 10px;
 }
 h4 {
-  margin: 20px 200px;
+  margin: 30px 230px;
 }
 
 img{
@@ -93,6 +104,10 @@ ul{
   height:80px;
   width:70%;
   border: 2px solid white;  
+}
+
+.btn{
+  margin-top:14px;
 }
 
 </style>
