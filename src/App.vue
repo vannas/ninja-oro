@@ -25,26 +25,25 @@
 <script>
 
 import ninjagold from './components/ninjagold.vue'
-import store from './store.js'
 
 export default {
   name: 'App',
   components: {
     ninjagold
   },
-  data: () => {
-    return store.state
+  computed: {
+    golds: function(){
+      return this.$store.state.golds
+    },
+    eventos: function(){
+      return this.$store.state.eventos
+    }
   },
-  methods:{
-    resetear_todo: function(){
-      var y=confirm("¿Verdaderamente quieres empezar de cero? Se borrará todo tu progreso");
-      if(y==true){
-          store.state.golds=0;
-          store.state.eventos=[];
-      }
-      else return;
+  methods: {
+    resetear_todo(){
+      this.$store.commit("resetear_todo");
     }
-    }
+  }
   }
 
 </script>

@@ -5,15 +5,13 @@
       <h5 class="card-title"> {{title}}</h5>
       <img img :src="require('@/assets/img/' + title + '.png')">
       <p class="card-text"> Gana entre {{min}} a {{max}} oros</p>
-      <a href="#" class="btn btn-warning" @click="Puntaje">Busca Oro!</a>
+      <a href="#" class="btn btn-warning" @click="update_puntaje">Busca Oro!</a>
     </div>
   </div>
   
 </template>
 
 <script>
-
-import store from '@/store.js'
 
 export default {
   name: 'ninjagold',
@@ -23,48 +21,14 @@ export default {
     max: Number,
   },
   methods: {
-    Puntaje: function(event){
-      event.preventDefault();
+    update_puntaje(ev){
+      ev.preventDefault();
       const ganaoro = Math.floor(Math.random() * (this.max - this.min)) + this.min;  //genero número al azar
-      let momento = hoy();
-      function hoy() {
-        var fecha= new Date();
-        let dd=fecha.getDate();
-        let mm=fecha.getMonth()+1;
-        const yyyy=fecha.getFullYear();
-        let hh=fecha.getHours();
-        let min=fecha.getMinutes();
-
-          if(dd<10){
-            dd=`0${dd}`;
-          }
-          if(mm<10){
-            mm=`0${mm}`;
-          }
-          if(min<10){
-            min=`0${min}`;
-          }
-        fecha=`${dd}/${mm}/${yyyy} a las ${hh}:${min} horas`;
-        return fecha
-      }
-      store.update_puntaje(ganaoro); // sumo oros
-      if (ganaoro > 0){
-        store.new_activity({texto:`Ganaste ${ganaoro} oros el ${momento}`, valor:ganaoro});  //genero actividad (ganancia)
-        
-      } else {
-        if (ganaoro == '0'){
-        store.new_activity({texto:`Sin suerte. No ganaste oro el ${momento}`, valor:ganaoro}); //Neutra
-        } else if (ganaoro < '0'){
-        store.new_activity({texto:`Cielos! Perdiste ${ganaoro} oros el ${momento}`, valor:ganaoro}); // Pierdo
-        
-        }
-      }
-
-      const historia = document.querySelector('.historia');
-        historia.scrollTo(0, historia.scrollHeight);
+      this.$store.commit("Puntaje", ganaoro)
     },
   }
 }
+
 </script>
 
 <style scoped>
